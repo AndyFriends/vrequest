@@ -42,10 +42,10 @@ dependencies {
 #### You can now post something
 ```java
 new VRequest()
-                .with(context)
-                .load(url)
-		.post(params)
-                .onSuccess(new Response.Listener<MyObject>() {
+                .with(this) //our context
+                .load(url) //your endpoint
+		.post(params) //some JSONObject containing your data
+                .onSuccess(new Response.Listener<MyObject>() { //triggered on success
                     @Override
                     public void onResponse(MyObject myObject) {
                         //TODO be happy using your object
