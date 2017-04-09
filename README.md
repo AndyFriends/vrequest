@@ -69,8 +69,32 @@ new VRequest()
 ```
 
 #### Tip of advice:
-##### extending [VRequest](https://github.com/AndyFriends/vrequest) you can `@Override` `deliverError()` method and *voilà*
+###### extending [VRequest](https://github.com/AndyFriends/vrequest) you can `@Override` `deliverError()` method
 
+```java
+class MyRequest<T> extends VRequest<T> {
+@Override
+    public void deliverError(VolleyError error) {
+        // here we provide a response for the default listener
+        if (null != mVolleyErrorListener) mVolleyErrorListener.onErrorResponse(error);
+
+        // here we customize
+        if (null != mErrorListener) {
+            //this is how we get the error data from our API
+            NetworkResponse responseError = error.networkResponse;
+            String dataError = new String(responseError.data);
+            //maybe your API returns some Json
+            JSONObject jsonError = new JSONObject(dataError);
+            //Gson can give a hand
+            MyUnderstandableErrorClass errorClass = new Gson().fromJson(jsonError, MyUnderstandableErrorClass.class);
+
+            mErrorListener.onResponse((T) errorClass);
+        }
+    }
+}
+```
+
+##### now it's easy to handle the errors on your Views or something
 ```java
 new MyRequest()
                 ....
