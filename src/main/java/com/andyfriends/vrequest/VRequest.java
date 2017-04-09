@@ -2,6 +2,7 @@ package com.andyfriends.vrequest;
 
 import android.content.Context;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * An extended {@link Request} class for {@link Volley} network requests.
@@ -39,7 +41,8 @@ public class VRequest<T> extends Request<T> {
     private static final String PROTOCOL_CONTENT_TYPE =
             String.format("application/json; charset=%s", PROTOCOL_CHARSET);
 
-    private Context mContext;
+
+    protected Context mContext;
     private int mMethod;
     private String mUrl;
     private JSONObject mRequestBody;
@@ -184,13 +187,29 @@ public class VRequest<T> extends Request<T> {
         return this;
     }
 
+    public Response.Listener getSuccessListener() {
+        return this.mListener;
+    }
 
-    /** THE REMAINING OF THIS CLASS ARE @Override METHODS FROM {@link Request}
-     *
+    //* THE REMAINING OF THIS CLASS ARE @Override METHODS FROM {@link Request} *//
+    /**
      * You must want to re-override them to meet your own purposes
      *  like to create an application's general #deliverResponse
      *  or #deliverError that could have some general behavior
      */
+
+    /**
+     * Returns the request's HTTP headers
+     *  You must like to override it to custom your headers
+     *  like sending some authentication token for example
+     *
+     * @return
+     * @throws AuthFailureError
+     */
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        return super.getHeaders();
+    }
 
     /**
      * Returns the request's body content type (grabbed from {@link JsonRequest})
