@@ -3,7 +3,7 @@
 ### A taste of how it works
 ```java
 new VRequest()
-                .with(this)
+                .with(context)
                 .load(url)
                 .post(jsonParams)
                 .onSuccess(new Listener<MyObject>() {
