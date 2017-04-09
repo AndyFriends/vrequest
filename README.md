@@ -18,7 +18,7 @@ allprojects {
 *reference:* [jitpack.io](https://jitpack.io)
 
 
-And to your App's build.gradle:
+and this to your App's build.gradle:
 ```java 
 dependencies {
     compile 'com.github.andyfriends:vrequest:v1.0'
