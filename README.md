@@ -6,11 +6,12 @@
 ### How to import
 ###### Android Studio
 Add this to your Project build.grandle:
+*reference for this: * [jitpack.io](https://jitpack.io)
 ```java
 allprojects {
 		repositories {
 			...
-			maven { url 'https://jitpack.io' } //package repository for Git
+			maven { url 'https://jitpack.io' }
 		}
 	}
 ```
@@ -18,7 +19,7 @@ allprojects {
 And to your App's build.gradle:
 ```java 
 dependencies {
-    compile 'com.github.AndyFriends:Volley-Request:v1.1'
+    compile 'com.github.andyfriends:vrequest:v1.0'
 }
 ```
 
