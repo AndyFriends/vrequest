@@ -109,6 +109,7 @@ new MyRequest()
 
 ### Useful links
 [Google Volley](https://developer.android.com/training/volley/index.html)
+
 [Google GSON](https://github.com/google/gson)
 
-### More details coming up soon folks
+##### More details coming up soon folks
