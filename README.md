@@ -6,7 +6,7 @@
 ### How to import
 ###### Android Studio
 Add this to your Project build.grandle:
-*reference for this: * [jitpack.io](https://jitpack.io)
+
 ```java
 allprojects {
 		repositories {
@@ -15,6 +15,8 @@ allprojects {
 		}
 	}
 ```
+*reference:* [jitpack.io](https://jitpack.io)
+
 
 And to your App's build.gradle:
 ```java 
