@@ -32,7 +32,7 @@ allprojects {
 and this to your App's build.gradle:
 ```java 
 dependencies {
-    compile 'com.github.andyfriends:vrequest:v1.0' //look for current version
+    compile 'com.github.andyfriends:vrequest:v1.2' //look for current version
 }
 ```
 
