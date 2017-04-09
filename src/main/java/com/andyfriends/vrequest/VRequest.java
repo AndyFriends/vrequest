@@ -43,12 +43,12 @@ public class VRequest<T> extends Request<T> {
 
 
     protected Context mContext;
-    private int mMethod;
-    private String mUrl;
-    private JSONObject mRequestBody;
-    private Response.Listener<T> mListener;
-    private Response.Listener<T> mErrorListener;
-    private Response.ErrorListener mVolleyErrorListener;
+    protected int mMethod;
+    protected String mUrl;
+    protected JSONObject mRequestBody;
+    protected Response.Listener<T> mListener;
+    protected Response.Listener<T> mErrorListener;
+    protected Response.ErrorListener mVolleyErrorListener;
 
     /**
      * The empty constructor enables us to create a request and use
