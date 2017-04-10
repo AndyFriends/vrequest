@@ -49,6 +49,7 @@ public class VRequest<T> extends Request<T> {
     protected Response.Listener<T> mListener;
     protected Response.Listener<T> mErrorListener;
     protected Response.ErrorListener mVolleyErrorListener;
+    protected IVRequestLoad mRequestLoad;
 
     /**
      * The empty constructor enables us to create a request and use
@@ -78,6 +79,17 @@ public class VRequest<T> extends Request<T> {
      */
     public VRequest load(String url) {
         this.mUrl = url;
+        return this;
+    }
+
+    /**
+     * Sets the url for the request
+     *
+     * @param requestLoad to make the request
+     * @return this instance of {@link VRequest}
+     */
+    public VRequest load(IVRequestLoad requestLoad) {
+        this.mRequestLoad = requestLoad;
         return this;
     }
 
@@ -254,7 +266,7 @@ public class VRequest<T> extends Request<T> {
      */
     @Override
     public String getUrl() {
-        return mUrl;
+        return null != mRequestLoad ? mRequestLoad.getUrl() : mUrl;
     }
 
     /**
@@ -299,6 +311,7 @@ public class VRequest<T> extends Request<T> {
 
                 T obj = gson.fromJson(json, thisClass);
 
+                if (null != mRequestLoad) mRequestLoad.onSuccessListener(obj);
                 if (null != mListener) mListener.onResponse(obj);
 
             } catch (Exception e) {
