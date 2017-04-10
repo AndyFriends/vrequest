@@ -29,13 +29,14 @@ allprojects {
 ```
 *reference:* [jitpack.io](https://jitpack.io)
 
-
 and this to your App's build.gradle:
 ```java 
 dependencies {
-    compile 'com.github.andyfriends:vrequest:v1.0'
+    compile 'com.github.andyfriends:vrequest:v1.2' //look for current version
 }
 ```
+
+[![](https://jitpack.io/v/andyfriends/vrequest.svg)](https://jitpack.io/#andyfriends/vrequest)
 
 ### Than you can start *getting*, *posting*, *patching*, *deleting*, or customising
 
