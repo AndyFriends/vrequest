@@ -102,6 +102,14 @@ public class VRequestManager {
         mRequestQueue.add(req);
     }
 
+    /**
+     * Cancels a {@link Request} currently on the {@link VRequestManager} queue
+     *  by its tag
+     * @param tag Request tag to be canceled
+     */
+    public void cancelRequest(String tag) {
+        if (null != mRequestQueue) mRequestQueue.cancelAll(tag);
+    }
 
     /**
      * Fluent API for creating {@link VRequestManager} instances.
