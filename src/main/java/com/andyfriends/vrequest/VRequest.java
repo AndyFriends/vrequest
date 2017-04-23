@@ -7,6 +7,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -189,13 +190,27 @@ public class VRequest<T> extends Request<T> {
 
     /**
      * Carry out the request and returns itself in case of future reuse needs
-     * As a {@link Volley} {@link Request} receives its values on its constructor
-     * we need to create it again
      *
      * @return this instance of {@link VRequest}
      */
     public VRequest fetch() {
         VRequestManager.singleton(mContext).addToRequestQueue(this);
+        return this;
+    }
+
+    /**
+     * Same as #fetch() method, except it can set a tag for the request
+     */
+    public VRequest fetch(String tag) {
+        VRequestManager.singleton(mContext).addToRequestQueue(this, tag);
+        return this;
+    }
+
+    /**
+     * Same as #fetch(String tag) method, except it can set a {@link RetryPolicy}
+     */
+    public VRequest fetch(String tag, RetryPolicy retryPolicy) {
+        VRequestManager.singleton(mContext).addToRequestQueue(this, tag, retryPolicy);
         return this;
     }
 
