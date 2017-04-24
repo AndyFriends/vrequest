@@ -214,6 +214,15 @@ public class VRequest<T> extends Request<T> {
         return this;
     }
 
+    /**
+     * Same as #fetch() method, except it can set a {@link RetryPolicy}
+     */
+    public VRequest fetch(RetryPolicy retryPolicy) {
+        String tag = mUrl;
+        VRequestManager.singleton(mContext).addToRequestQueue(this, tag, retryPolicy);
+        return this;
+    }
+
     public Response.Listener getSuccessListener() {
         return this.mListener;
     }
