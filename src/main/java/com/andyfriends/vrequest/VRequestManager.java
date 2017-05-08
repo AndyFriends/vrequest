@@ -79,7 +79,7 @@ public class VRequestManager {
      */
     public void addToRequestQueue(Request req, String tag) {
         RetryPolicy retryPolicy = new DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 
