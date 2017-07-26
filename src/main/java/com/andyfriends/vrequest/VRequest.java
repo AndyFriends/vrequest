@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @param <T> The type of parsed response this request expects.
  */
-public class VRequest<T> extends Request<T> {
+public class VRequest<T> extends Request<T> implements Cloneable {
 
     /**
      * Default charset for JSON request. (grabbed from {@link JsonRequest})
@@ -194,7 +194,7 @@ public class VRequest<T> extends Request<T> {
      * @return this instance of {@link VRequest}
      */
     public VRequest fetch() {
-        VRequestManager.singleton(mContext).addToRequestQueue(this);
+        VRequestManager.singleton(mContext).addToRequestQueue(getCopy());
         return this;
     }
 
@@ -202,7 +202,7 @@ public class VRequest<T> extends Request<T> {
      * Same as #fetch() method, except it can set a tag for the request
      */
     public VRequest fetch(String tag) {
-        VRequestManager.singleton(mContext).addToRequestQueue(this, tag);
+        VRequestManager.singleton(mContext).addToRequestQueue(getCopy(), tag);
         return this;
     }
 
@@ -210,7 +210,7 @@ public class VRequest<T> extends Request<T> {
      * Same as #fetch(String tag) method, except it can set a {@link RetryPolicy}
      */
     public VRequest fetch(String tag, RetryPolicy retryPolicy) {
-        VRequestManager.singleton(mContext).addToRequestQueue(this, tag, retryPolicy);
+        VRequestManager.singleton(mContext).addToRequestQueue(getCopy(), tag, retryPolicy);
         return this;
     }
 
@@ -219,12 +219,42 @@ public class VRequest<T> extends Request<T> {
      */
     public VRequest fetch(RetryPolicy retryPolicy) {
         String tag = mUrl;
-        VRequestManager.singleton(mContext).addToRequestQueue(this, tag, retryPolicy);
+        VRequestManager.singleton(mContext).addToRequestQueue(getCopy(), tag, retryPolicy);
         return this;
     }
 
+    /**
+     * Returns the listener to use when the request succeed
+     * @return
+     */
     public Response.Listener getSuccessListener() {
         return this.mListener;
+    }
+
+    /**
+     * Returns the {@link IVRequestLoad} object, if set
+     * @return
+     */
+    public IVRequestLoad getMRequestLoad() {
+        return mRequestLoad;
+    }
+
+    /**
+     * Creates a copy of itself to make the request properly
+     *  if you don't make a copy, the finish() method of {@link Request} does not work
+     *  so the request is kept into the queue
+     * @return
+     */
+    public VRequest getCopy() {
+        VRequest clone = this;
+
+        try {
+            clone = (VRequest) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return clone;
     }
 
     //* THE REMAINING OF THIS CLASS ARE @Override METHODS FROM {@link Request} *//
