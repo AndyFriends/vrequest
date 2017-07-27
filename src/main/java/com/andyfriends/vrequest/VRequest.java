@@ -194,6 +194,7 @@ public class VRequest<T> extends Request<T> implements Cloneable {
      * @return this instance of {@link VRequest}
      */
     public VRequest fetch() {
+        setShouldCache(false);
         VRequestManager.singleton(mContext).addToRequestQueue(getCopy());
         return this;
     }
@@ -202,6 +203,7 @@ public class VRequest<T> extends Request<T> implements Cloneable {
      * Same as #fetch() method, except it can set a tag for the request
      */
     public VRequest fetch(String tag) {
+        setShouldCache(false);
         VRequestManager.singleton(mContext).addToRequestQueue(getCopy(), tag);
         return this;
     }
@@ -210,6 +212,7 @@ public class VRequest<T> extends Request<T> implements Cloneable {
      * Same as #fetch(String tag) method, except it can set a {@link RetryPolicy}
      */
     public VRequest fetch(String tag, RetryPolicy retryPolicy) {
+        setShouldCache(false);
         VRequestManager.singleton(mContext).addToRequestQueue(getCopy(), tag, retryPolicy);
         return this;
     }
@@ -218,6 +221,7 @@ public class VRequest<T> extends Request<T> implements Cloneable {
      * Same as #fetch() method, except it can set a {@link RetryPolicy}
      */
     public VRequest fetch(RetryPolicy retryPolicy) {
+        setShouldCache(false);
         String tag = mUrl;
         VRequestManager.singleton(mContext).addToRequestQueue(getCopy(), tag, retryPolicy);
         return this;
